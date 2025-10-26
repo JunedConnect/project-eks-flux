@@ -41,7 +41,8 @@ spec:
   role: "karpenter-node-role"
   amiFamily: AL2
   amiSelectorTerms:
-    - name: "ami-0eea17e5a980ec442"
+    - id: "ami-0eea17e5a980ec442"
+    - name: "amazon-eks-node-al2023-x86_64-standard-1.31-v20251016"
   subnetSelectorTerms:
     - tags:
         karpenter.sh/discovery: "juned-cluster"
