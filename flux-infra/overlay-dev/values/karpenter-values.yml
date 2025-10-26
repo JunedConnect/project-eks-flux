@@ -9,6 +9,6 @@ settings:
   clusterName: "juned-cluster"
 #  interruptionQueue: "juned-cluster"
 
-tolerations:
-  - key: infra
-    operator: Exists
+# tolerations:
+#   - key: infra
+#     operator: Exists
