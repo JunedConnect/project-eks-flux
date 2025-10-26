@@ -20,7 +20,7 @@ spec:
   chart:
     spec:
       chart: karpenter-crd
-      version: 1.8.2 # mentioning the "v" at the beginning will not work here
+      version: 1.8.1 # mentioning the "v" at the beginning will not work here
       interval: 10m0s # this is the interval for checking the chart i.e. version
       sourceRef:
         kind: HelmRepository
