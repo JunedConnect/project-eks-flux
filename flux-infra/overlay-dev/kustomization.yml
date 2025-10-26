@@ -28,7 +28,7 @@ configMapGenerator: # I chose the configMap way to input the values as it allows
   - name: karpenter-values
     namespace: karpenter # needed in order for configmap to be created in the correct namespace
     files:
-      - values.yaml=values/karpeneter-values.yml
+      - values.yaml=values/karpenter-values.yml
 configurations:
   - kustomizeconfig.yml
 
