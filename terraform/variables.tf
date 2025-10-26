@@ -6,11 +6,6 @@ variable "name" {
   default     = "test"
 }
 
-variable "region" {
-  description = "Region"
-  type        = string
-  default     = "eu-west-2"
-}
 
 variable "aws_tags" {
   description = "Tags for Resources"
@@ -137,6 +132,12 @@ variable "external_secrets_namespace" {
   description = "The namespace for external-secrets"
   type        = string
   default     = "external-secrets"
+}
+
+variable "karpenter_namespace" {
+  description = "The namespace for karpenter"
+  type        = string
+  default     = "karpenter"
 }
 
 

@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
 - issuer.yml
 - secretstore.yml
+- karpenter.yml

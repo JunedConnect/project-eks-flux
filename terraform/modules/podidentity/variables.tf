@@ -18,7 +18,18 @@ variable "external_secrets_namespace" {
   type        = string
 }
 
+variable "karpenter_namespace" {
+  description = "The namespace for karpenter"
+  type        = string
+}
+
 variable "route53_zone_id" {
   description = "Route 53 hosted zone ID"
   type        = string
 }
+
+variable "karpenter_node_role_arn" {
+  description = "ARN of the Karpenter node IAM role"
+  type        = string
+}
+

@@ -27,6 +27,12 @@ module "eks" {
 
 }
 
+module "karpenter" {
+  source = "./modules/karpenter"
+
+  cluster_name = module.eks.eks_cluster_name
+}
+
 
 module "podidentity" {
   source = "./modules/podidentity"
@@ -37,7 +43,9 @@ module "podidentity" {
   cert_manager_namespace = var.cert_manager_namespace
   external_dns_namespace = var.external_dns_namespace
   external_secrets_namespace = var.external_secrets_namespace
+  karpenter_namespace = var.karpenter_namespace
 
+  karpenter_node_role_arn = module.karpenter.karpenter_node_role_arn
 }
 
 module "route53" {

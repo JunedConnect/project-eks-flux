@@ -1,0 +1,14 @@
+replicas: 2 # default is 2
+serviceAccount:
+  create: true # default is true
+  name: karpenter
+  annotations:
+      eks.amazonaws.com/role-arn: "arn:aws:iam::677276074604:role/karpenter-role"
+logLevel: debug
+settings:
+  clusterName: "juned-cluster"
+#  interruptionQueue: "juned-cluster"
+
+tolerations:
+  - key: infra
+    operator: Exists

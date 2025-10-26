@@ -69,6 +69,7 @@ resource "aws_subnet" "privatesubnet1" {
   tags = {
     "kubernetes.io/cluster/${var.name}" = "owned"
     "kubernetes.io/role/internal-elb"   = 1
+    "karpenter.sh/discovery"             = var.name
   }
 }
 
@@ -81,6 +82,7 @@ resource "aws_subnet" "privatesubnet2" {
   tags = {
     "kubernetes.io/cluster/${var.name}" = "owned"
     "kubernetes.io/role/internal-elb"   = 1
+    "karpenter.sh/discovery"             = var.name
   }
 }
 

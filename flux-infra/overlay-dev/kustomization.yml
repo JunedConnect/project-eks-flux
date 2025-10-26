@@ -25,6 +25,10 @@ configMapGenerator: # I chose the configMap way to input the values as it allows
     namespace: cert-manager # needed in order for configmap to be created in the correct namespace
     files:
       - values.yaml=values/cert-manager-values.yml
+  - name: karpenter-values
+    namespace: karpenter # needed in order for configmap to be created in the correct namespace
+    files:
+      - values.yaml=values/karpeneter-values.yml
 configurations:
   - kustomizeconfig.yml
 
@@ -71,3 +75,24 @@ patches:
     target:
       kind: HelmRelease
       name: prom-graf
+  - patch: |-
+      - op: replace
+        path: /spec/chart/spec/version
+        value: v0.36.0
+    target:
+      kind: HelmRelease
+      name: headlamp
+  - patch: |-
+      - op: replace
+        path: /spec/chart/spec/version
+        value: 1.8.2
+    target:
+      kind: HelmRelease
+      name: karpenter
+  - patch: |-
+      - op: replace
+        path: /spec/chart/spec/version
+        value: 1.8.2
+    target:
+      kind: HelmRelease
+      name: karpenter-crd

@@ -80,6 +80,15 @@ resource "aws_eks_node_group" "this" {
   instance_types = var.instance_types
   capacity_type  = var.capacity_type
 
+  tags = {
+    "karpenter.sh/discovery" = var.name
+  }
+  # taint {
+  #   key    = "infra"
+  #   value  = "true"
+  #   effect = "NO_EXECUTE"
+  # }
+
   # Ensure that IAM Role permissions are created before and deleted after EKS Node Group handling.
   # Otherwise, EKS will not be able to properly delete EC2 Instances and Elastic Network Interfaces.
   depends_on = [
@@ -118,3 +127,11 @@ resource "aws_iam_role_policy_attachment" "AmazonEC2ContainerRegistryReadOnly" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
   role       = aws_iam_role.eks-node-group-role.name
 }
+
+# below is to tag the cluster primary security group for karpenter discovery
+resource "aws_ec2_tag" "cluster-primary-security-group" {
+  resource_id = aws_eks_cluster.this.vpc_config[0].cluster_security_group_id
+  key         = "karpenter.sh/discovery"
+  value       = var.name
+}
+

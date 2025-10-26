@@ -1,6 +1,5 @@
 # General
 name   = "juned-cluster"
-region = "eu-west-2"
 aws_tags = {
   Environment = "dev"
   Project     = "eks"
@@ -15,13 +14,13 @@ cluster_version                             = "1.31"
 endpoint_private_access                     = true
 endpoint_public_access                      = true
 upgrade_support_type                        = "STANDARD"
-node_group_name                             = "eks-node-group"
+node_group_name                             = "eks-infra-node"
 desired_size                                = 1
 max_size                                    = 2
 min_size                                    = 1
 instance_disk_size                          = 50
 instance_types                              = ["t3.large"]
-capacity_type                               = "ON_DEMAND"
+capacity_type                               = "SPOT"
 eks_cluster_role_name                       = "eks-cluster-role"
 eks_node_group_role_name                    = "eks-node-group-role"
 
@@ -29,6 +28,7 @@ eks_node_group_role_name                    = "eks-node-group-role"
 cert_manager_namespace = "cert-manager"
 external_dns_namespace = "external-dns"
 external_secrets_namespace = "external-secrets"
+karpenter_namespace = "karpenter"
 
 # Route53
 domain_name = "lab.juned.co.uk"
