@@ -78,6 +78,11 @@ variable "eks_node_group_role_name" {
   type        = string
 }
 
+variable "karpenter_node_role_arn" {
+  description = "ARN of the Karpenter node IAM role"
+  type        = string
+}
+
 variable "public_subnet_1_id" {
   description = "Public subnet 1 ID"
   type        = string

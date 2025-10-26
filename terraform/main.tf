@@ -24,6 +24,7 @@ module "eks" {
 
   eks_cluster_role_name    = var.eks_cluster_role_name
   eks_node_group_role_name = var.eks_node_group_role_name
+  karpenter_node_role_arn  = module.karpenter.karpenter_node_role_arn
 
 }
 
