@@ -13,6 +13,8 @@ serviceAccount:
 
 ingress:
   enabled: true # default is false
+  annotations:
+    cert-manager.io/cluster-issuer: issuer
   ingressClassName: "nginx"
   hosts:
     - host: headlamp.lab.juned.co.uk
