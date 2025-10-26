@@ -38,7 +38,7 @@ resource "aws_eks_cluster" "this" {
 resource "aws_eks_addon" "eks-pod-identity-agent" {
   cluster_name = aws_eks_cluster.this.name
   addon_name = "eks-pod-identity-agent"
-  addon_version = "v1.39.9-eksbuild.3"
+  addon_version = "v1.3.9-eksbuild.3"
 }
 
 
