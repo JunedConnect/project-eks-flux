@@ -35,6 +35,12 @@ resource "aws_eks_cluster" "this" {
 
 }
 
+resource "aws_eks_addon" "eks-pod-identity-agent" {
+  cluster_name = aws_eks_cluster.this.name
+  addon_name = "eks-pod-identity-agent"
+  addon_version = "v1.39.9-eksbuild.3"
+}
+
 
 resource "aws_iam_role" "eks-cluster-role" {
   name = var.eks_cluster_role_name
@@ -127,6 +133,7 @@ resource "aws_iam_role_policy_attachment" "AmazonEC2ContainerRegistryReadOnly" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
   role       = aws_iam_role.eks-node-group-role.name
 }
+
 
 # below is to tag the cluster primary security group for karpenter discovery
 resource "aws_ec2_tag" "cluster-primary-security-group" {
