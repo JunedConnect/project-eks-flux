@@ -9,6 +9,8 @@ settings:
   clusterName: "juned-cluster"
 #  interruptionQueue: "juned-cluster"
 
+nodeSelector:
+  karpenter.sh/controller: "true"
 # tolerations:
 #   - key: infra
 #     operator: Exists

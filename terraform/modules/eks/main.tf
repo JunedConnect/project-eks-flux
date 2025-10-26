@@ -94,9 +94,14 @@ resource "aws_eks_node_group" "this" {
   instance_types = var.instance_types
   capacity_type  = var.capacity_type
 
+  labels = {
+        # used to ensure karpenter runs on nodes that it does not manage
+        "karpenter.sh/controller" = "true"
+      }
   tags = {
     "karpenter.sh/discovery" = var.name
   }
+  
   # taint {
   #   key    = "infra"
   #   value  = "true"
