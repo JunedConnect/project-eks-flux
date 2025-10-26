@@ -39,9 +39,7 @@ metadata:
   name: default
 spec:
   role: "karpenter-node-role"
-  amiSelectorTerms:
-    - name: "amazon-eks-node-*"
-      owner: "602401143452" # Amazon EKS AMI Account ID
+  amiFamily: AL2
   subnetSelectorTerms:
     - tags:
         karpenter.sh/discovery: "juned-cluster"
