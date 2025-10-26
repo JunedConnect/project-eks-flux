@@ -6,6 +6,5 @@ resources:
 - external-secrets.yml
 - headlamp.yml
 - karpenter.yml
-- karpenter-crd.yml
 - nginx.yml
 - prom-graf.yml

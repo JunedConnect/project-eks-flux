@@ -89,10 +89,3 @@ patches:
     target:
       kind: HelmRelease
       name: karpenter
-  - patch: |-
-      - op: replace
-        path: /spec/chart/spec/version
-        value: 1.8.1
-    target:
-      kind: HelmRelease
-      name: karpenter-crd
