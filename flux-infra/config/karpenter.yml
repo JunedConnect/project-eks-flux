@@ -40,6 +40,8 @@ metadata:
 spec:
   role: "karpenter-node-role"
   amiFamily: AL2
+  amiSelectorTerms:
+    name: "ami-0eea17e5a980ec442"
   subnetSelectorTerms:
     - tags:
         karpenter.sh/discovery: "juned-cluster"
