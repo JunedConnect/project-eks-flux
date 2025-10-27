@@ -57,7 +57,7 @@ metadata:
 spec:
   role: "karpenter-node-role"
   amiSelectorTerms:
-    - alias: al2023@latest
+    - alias: al2023@latest #this needs to be correcet otherwise you will get an error that the NodeClaim cannot associate with the Node
   subnetSelectorTerms:
     - tags:
         karpenter.sh/discovery: "juned-cluster"
