@@ -33,16 +33,31 @@ spec:
     consolidationPolicy: WhenEmptyOrUnderutilized
     consolidateAfter: 1m
 ---
+# apiVersion: karpenter.k8s.aws/v1
+# kind: EC2NodeClass
+# metadata:
+#   name: default
+# spec:
+#   role: "karpenter-node-role"
+#   amiFamily: AL2
+#   amiSelectorTerms:
+#     - id: "ami-0eea17e5a980ec442"
+#     - name: "amazon-eks-node-al2023-x86_64-standard-1.31-v20251016"
+#   subnetSelectorTerms:
+#     - tags:
+#         karpenter.sh/discovery: "juned-cluster"
+#   securityGroupSelectorTerms:
+#     - tags:
+#         karpenter.sh/discovery: "juned-cluster"
+---
 apiVersion: karpenter.k8s.aws/v1
 kind: EC2NodeClass
 metadata:
   name: default
 spec:
   role: "karpenter-node-role"
-  amiFamily: AL2
   amiSelectorTerms:
     - id: "ami-0eea17e5a980ec442"
-    - name: "amazon-eks-node-al2023-x86_64-standard-1.31-v20251016"
   subnetSelectorTerms:
     - tags:
         karpenter.sh/discovery: "juned-cluster"
