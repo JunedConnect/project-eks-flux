@@ -41,6 +41,7 @@ resource "aws_eks_addon" "eks-pod-identity-agent" {
   addon_version = "v1.3.9-eksbuild.3"
 }
 
+# access entry to allow karpeneter provisioned nodes to access the cluster
 resource "aws_eks_access_entry" "karpenter-node-role" {
   cluster_name = var.name
   principal_arn = var.karpenter_node_role_arn
