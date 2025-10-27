@@ -1,7 +1,7 @@
 apiVersion: karpenter.sh/v1
 kind: NodePool
 metadata:
-  name: default
+  name: nodepool
 spec:
   template:
     spec:
@@ -17,47 +17,30 @@ spec:
           values: ["spot"]
         - key: karpenter.k8s.aws/instance-category
           operator: In
-          values: ["c", "m", "r"]
+          values: ["c", "t", "m"]
         - key: karpenter.k8s.aws/instance-generation
           operator: Gt
           values: ["2"]
       nodeClassRef:
         group: karpenter.k8s.aws
         kind: EC2NodeClass
-        name: default
+        name: al2023-latest
       expireAfter: 720h # 30 * 24h = 720h
   limits:
-    cpu: 1000
+    cpu: 100
     nodes: 5
   disruption:
     consolidationPolicy: WhenEmptyOrUnderutilized
     consolidateAfter: 1m
 ---
-# apiVersion: karpenter.k8s.aws/v1
-# kind: EC2NodeClass
-# metadata:
-#   name: default
-# spec:
-#   role: "karpenter-node-role"
-#   amiFamily: AL2
-#   amiSelectorTerms:
-#     - id: "ami-0eea17e5a980ec442"
-#     - name: "amazon-eks-node-al2023-x86_64-standard-1.31-v20251016"
-#   subnetSelectorTerms:
-#     - tags:
-#         karpenter.sh/discovery: "juned-cluster"
-#   securityGroupSelectorTerms:
-#     - tags:
-#         karpenter.sh/discovery: "juned-cluster"
----
 apiVersion: karpenter.k8s.aws/v1
 kind: EC2NodeClass
 metadata:
-  name: default
+  name: al2023-latest
 spec:
   role: "karpenter-node-role"
   amiSelectorTerms:
-    - alias: al2023@latest #this needs to be correcet otherwise you will get an error that the NodeClaim cannot associate with the Node
+    - alias: al2023@latest # this needs to be correct otherwise you will get an error that the NodeClaim cannot associate with the Node
   subnetSelectorTerms:
     - tags:
         karpenter.sh/discovery: "juned-cluster"
