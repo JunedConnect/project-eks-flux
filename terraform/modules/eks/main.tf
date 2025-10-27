@@ -44,9 +44,7 @@ resource "aws_eks_addon" "eks-pod-identity-agent" {
 resource "aws_eks_access_entry" "karpenter-node-role" {
   cluster_name = var.name
   principal_arn = var.karpenter_node_role_arn
-  
-  kubernetes_groups = ["system:bootstrappers", "system:nodes"]
-  type = "EC2_LINUX"
+  type         = "EC2_LINUX"
 }
 
 
