@@ -43,34 +43,34 @@ tolerations:
 
 
 
-# below is the installation of the flux plugin
+# below is the installation of the flux plugin (and also other plugins)
 # guide https://github.com/headlamp-k8s/plugins/tree/main/flux
 # image link https://github.com/headlamp-k8s/plugins/pkgs/container/headlamp-plugin-flux
-initContainers:
-  - command:
-      - /bin/sh
-      - -c
-      - mkdir -p /build/plugins && cp -r /plugins/* /build/plugins/ && chown -R 100:101 /build
-    image: ghcr.io/headlamp-k8s/headlamp-plugin-flux:latest # using 0.4.0 but mentioning the exact version number tag does not work hence why using "latest" tag
-    imagePullPolicy: Always
-    name: headlamp-plugins
-    securityContext:
-      runAsNonRoot: false
-      privileged: false
-      runAsUser: 0
-      runAsGroup: 0
-    volumeMounts: # volume mount for the init container
-      - mountPath: /build/plugins
-        name: headlamp-plugins
-  - command:
-      - /bin/sh
-      - '-c'
-      - mkdir -p /build/plugins && cp -r /plugins/* /build/plugins/
-    image: ghcr.io/kubebeam/trivy-headlamp-plugin:v0.3.1
-    name: trivy-plugin
-    volumeMounts:
-      - mountPath: /build/plugins
-        name: headlamp-plugins
+# initContainers:
+#   - command:
+#       - /bin/sh
+#       - -c
+#       - mkdir -p /build/plugins && cp -r /plugins/* /build/plugins/ && chown -R 100:101 /build
+#     image: ghcr.io/headlamp-k8s/headlamp-plugin-flux:latest # using 0.4.0 but mentioning the exact version number tag does not work hence why using "latest" tag
+#     imagePullPolicy: Always
+#     name: headlamp-plugins
+#     securityContext:
+#       runAsNonRoot: false
+#       privileged: false
+#       runAsUser: 0
+#       runAsGroup: 0
+#     volumeMounts: # volume mount for the init container
+#       - mountPath: /build/plugins
+#         name: headlamp-plugins
+#   - command:
+#       - /bin/sh
+#       - '-c'
+#       - mkdir -p /build/plugins && cp -r /plugins/* /build/plugins/
+#     image: ghcr.io/kubebeam/trivy-headlamp-plugin:v0.3.1
+#     name: trivy-plugin
+#     volumeMounts:
+#       - mountPath: /build/plugins
+#         name: headlamp-plugins
 
 
 #volumes set up that is needed for plugin to work
@@ -83,3 +83,5 @@ volumes:
     emptyDir: {} # decided to use a temp volume as there is no actual data that I need to be persistent (since the headlamp app only has to use the static files htat the plugin installs on that directory for as long as the headlamp app, i.e. the pod, runs). Empty dir works here only because the headlamp app container and the plugin container exist in the same pod
     # persistentVolumeClaim:
     #   claimName: headlamp # The name of the Helm release
+
+
