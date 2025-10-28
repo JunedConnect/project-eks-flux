@@ -1,10 +1,11 @@
-alertmanagerSpec:
-  nodeSelector:
-    infra: "true"
-  tolerations:
-    - key: infra
-      operator: Equal
-      value: "true"
+alertmanager:
+  alertmanagerSpec:
+    nodeSelector:
+      infra: "true"
+    tolerations:
+      - key: infra
+        operator: Equal
+        value: "true"
 
 prometheusOperator:
   nodeSelector:
