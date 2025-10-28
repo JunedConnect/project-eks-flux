@@ -19,7 +19,6 @@ resource "aws_eks_cluster" "this" {
 
     endpoint_private_access = var.endpoint_private_access
     endpoint_public_access  = var.endpoint_public_access
-
   }
 
   upgrade_policy {
@@ -46,6 +45,10 @@ resource "aws_eks_access_entry" "karpenter-node-role" {
   cluster_name = var.name
   principal_arn = var.karpenter_node_role_arn
   type         = "EC2_LINUX"
+
+  depends_on = [
+    aws_eks_cluster.this
+  ]
 }
 
 
@@ -94,18 +97,19 @@ resource "aws_eks_node_group" "this" {
   capacity_type  = var.capacity_type
 
   labels = {
-        # used to ensure karpenter runs on nodes that it does not manage
-        "karpenter.sh/controller" = "true"
+        # used to ensure infra runs on this node group
+        "karpenter.sh/controller" = "true" # karpenter uses this
+        "infra"                   = "true" # infra uses this
       }
+
+  taint {
+    key    = "infra"
+    value  = "true"
+    effect = "NO_EXECUTE"
+  }
   tags = {
     "karpenter.sh/discovery" = var.name
   }
-  
-  # taint {
-  #   key    = "infra"
-  #   value  = "true"
-  #   effect = "NO_EXECUTE"
-  # }
 
   # Ensure that IAM Role permissions are created before and deleted after EKS Node Group handling.
   # Otherwise, EKS will not be able to properly delete EC2 Instances and Elastic Network Interfaces.
