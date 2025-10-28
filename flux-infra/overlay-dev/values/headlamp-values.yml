@@ -87,7 +87,7 @@ volumes:
 
 # testing out plugin management i.e. https://navneet-verma.medium.com/no-nonsense-guide-deploying-headlamp-on-vks-helm-plugins-53ca91517143
 pluginsManager:
-  enabled: false                              # Default is false
+  enabled: true                              # Default is false
   configContent: |                           # Default is "". Add additional plugins as needed.  
     plugins:
       - name: cert-manager
@@ -110,11 +110,11 @@ pluginsManager:
         version: 0.1.0-alpha
   baseImage: node:lts-alpine  # Default is node:lts-alpine
   version: latest # Default is latest
-  securityContext:
-    runAsUser: 1001
-    runAsNonRoot: true
-    allowPrivilegeEscalation: false
-    readOnlyRootFilesystem: true
-    capabilities:
-      drop:
-        - ALL
+  # securityContext:
+  #   runAsUser: 1001
+  #   runAsNonRoot: true
+  #   allowPrivilegeEscalation: false
+  #   readOnlyRootFilesystem: true
+  #   capabilities:
+  #     drop:
+  #       - ALL
