@@ -90,24 +90,24 @@ pluginsManager:
   enabled: true                              # Default is false
   configContent: |                           # Default is "". Add additional plugins as needed.  
     plugins:
-#      - name: cert-manager
-#        source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_cert-manager
-#        version: 0.1.0-alpha
-#      - name: trivy
-#        source: https://artifacthub.io/packages/headlamp/headlamp-trivy/headlamp_trivy
-#        version: 0.3.1
-#      - name: ai-assistant
-#        source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_ai_assistant
-#        version: 0.1.0-alpha
-#      - name: flux
-#        source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_flux
-#        version: 0.4.0
-#      - name: karpenter
-#        source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_karpenter
-#        version: 0.1.0-alpha
-#      - name: external-secrets-operator
-#        source: https://artifacthub.io/packages/headlamp/external-secrets-operator-headlamp-plugin/external-secrets-operator
-#        version: 0.1.0-alpha
+     - name: cert-manager
+       source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_cert-manager
+       version: 0.1.0-alpha
+     - name: trivy
+       source: https://artifacthub.io/packages/headlamp/headlamp-trivy/headlamp_trivy
+       version: 0.3.1
+     - name: ai-assistant
+       source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_ai_assistant
+       version: 0.1.0-alpha
+     - name: flux
+       source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_flux
+       version: 0.4.0
+     - name: karpenter
+       source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_karpenter
+       version: 0.1.0-alpha
+     - name: external-secrets-operator
+       source: https://artifacthub.io/packages/headlamp/external-secrets-operator-headlamp-plugin/external-secrets-operator
+       version: 0.1.0-alpha
   baseImage: node:lts-alpine  # Default is node:lts-alpine
   version: latest # Default is latest
   securityContext:
