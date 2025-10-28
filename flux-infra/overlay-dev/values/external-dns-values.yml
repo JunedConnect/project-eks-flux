@@ -15,3 +15,10 @@ aws:
 
 domainFilters:
 - lab.juned.co.uk # needed otherwise it will have the ability to create records for any domain
+
+nodeSelector:
+  infra: "true"
+tolerations:
+  - key: infra
+    operator: Equal
+    value: "true"

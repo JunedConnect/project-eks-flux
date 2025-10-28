@@ -8,3 +8,10 @@ serviceAccount:
 extraArgs:
 - --dns01-recursive-nameservers="8.8.8.8:53"
 - --dns01-recursive-nameservers-only
+
+nodeSelector:
+  infra: "true"
+tolerations:
+  - key: infra
+    operator: Equal
+    value: "true"

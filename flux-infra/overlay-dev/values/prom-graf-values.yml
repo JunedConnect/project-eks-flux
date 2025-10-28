@@ -1,5 +1,28 @@
+alertmanagerSpec:
+  nodeSelector:
+    infra: "true"
+  tolerations:
+    - key: infra
+      operator: Equal
+      value: "true"
+
+prometheusOperator:
+  nodeSelector:
+    infra: "true"
+  tolerations:
+    - key: infra
+      operator: Equal
+      value: "true"
+
 prometheus:
   enabled: true
+  prometheusSpec:
+    nodeSelector:
+      infra: "true"
+    tolerations:
+      - key: infra
+        operator: Equal
+        value: "true"
   service:
     type: ClusterIP
   ingress:
@@ -18,6 +41,12 @@ prometheus:
 
 grafana:
   enabled: true
+  nodeSelector:
+    infra: "true"
+  tolerations:
+    - key: infra
+      operator: Equal
+      value: "true"
   service:
     type: ClusterIP
   ingress:

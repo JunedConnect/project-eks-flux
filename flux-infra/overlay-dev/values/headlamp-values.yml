@@ -34,6 +34,13 @@ clusterRoleBinding:
   create: true # default is true
   clusterRoleName: cluster-admin # default is "cluster-admin" # test out the "view" role
 
+nodeSelector:
+  infra: "true"
+tolerations:
+  - key: infra
+    operator: Equal
+    value: "true"
+
 
 
 # below is the installation of the flux plugin
@@ -53,6 +60,15 @@ initContainers:
       runAsUser: 0
       runAsGroup: 0
     volumeMounts: # volume mount for the init container
+      - mountPath: /build/plugins
+        name: headlamp-plugins
+  - command:
+      - /bin/sh
+      - '-c'
+      - mkdir -p /build/plugins && cp -r /plugins/* /build/plugins/
+    image: ghcr.io/kubebeam/trivy-headlamp-plugin:v0.3.1
+    name: trivy-plugin
+    volumeMounts:
       - mountPath: /build/plugins
         name: headlamp-plugins
 

@@ -11,6 +11,7 @@ settings:
 
 nodeSelector:
   karpenter.sh/controller: "true"
-# tolerations:
-#   - key: infra
-#     operator: Exists
+tolerations:
+  - key: infra
+    operator: Equal
+    value: "true"
