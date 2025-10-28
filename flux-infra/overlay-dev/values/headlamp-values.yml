@@ -114,7 +114,7 @@ pluginsManager:
     runAsUser: 1001
     runAsNonRoot: true
     allowPrivilegeEscalation: false
-    readOnlyRootFilesystem: true
+    readOnlyRootFilesystem: false # needs to be turned off othewise plugin manager will not work
     capabilities:
       drop:
         - ALL
