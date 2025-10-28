@@ -1,0 +1,30 @@
+  # service:
+  #   type: LoadBalancer
+  #   annotations:
+  #     service.beta.kubernetes.io/aws-load-balancer-type: nlb
+  #     service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
+
+controller:
+  nodeSelector:
+    infra: "true"
+  tolerations:
+    - key: infra
+      operator: Equal
+      value: "true"
+  admissionWebhooks:
+    patch:
+      nodeSelector:
+        infra: "true"
+      tolerations:
+        - key: infra
+          operator: Equal
+          value: "true"
+
+defaultBackend:
+  nodeSelector:
+    infra: "true"
+  tolerations:
+    - key: infra
+      operator: Equal
+      value: "true"
+

@@ -32,3 +32,6 @@ spec:
   releaseName: ingress-nginx # this is where to deploy the resources
   targetNamespace: nginx
   interval: 10m0s # this is the interval for checking the release i.e. deployment of the chart
+  valuesFrom:
+    - kind: ConfigMap
+      name: nginx-values

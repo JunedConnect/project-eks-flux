@@ -15,3 +15,27 @@ tolerations:
   - key: infra
     operator: Equal
     value: "true"
+
+webhook:
+  nodeSelector:
+    infra: "true"
+  tolerations:
+    - key: infra
+      operator: Equal
+      value: "true"
+
+cainjector:
+  nodeSelector:
+    infra: "true"
+  tolerations:
+    - key: infra
+      operator: Equal
+      value: "true"
+
+startupapicheck:
+  nodeSelector:
+    infra: "true"
+  tolerations:
+    - key: infra
+      operator: Equal
+      value: "true"

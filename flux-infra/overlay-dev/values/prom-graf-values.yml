@@ -13,6 +13,16 @@ prometheusOperator:
     - key: infra
       operator: Equal
       value: "true"
+  admissionWebhooks:
+    patch:
+      nodeSelector:
+        infra: "true"
+      tolerations:
+        - key: infra
+          operator: Equal
+          value: "true"
+
+
 
 prometheus:
   enabled: true
