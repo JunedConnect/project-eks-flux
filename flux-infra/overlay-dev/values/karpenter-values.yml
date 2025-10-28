@@ -9,6 +9,9 @@ settings:
   clusterName: "juned-cluster"
 #  interruptionQueue: "juned-cluster"
 
+featureGates:
+  spotToSpotConsolidation: true # default is false
+
 nodeSelector:
   karpenter.sh/controller: "true"
 tolerations:
