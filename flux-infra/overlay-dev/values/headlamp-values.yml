@@ -87,7 +87,7 @@ volumes:
 
 # testing out plugin management i.e. https://navneet-verma.medium.com/no-nonsense-guide-deploying-headlamp-on-vks-helm-plugins-53ca91517143
 pluginsManager:
-  enabled: true                              # Default is false
+  enabled: false                              # Default is false
   configContent: |                           # Default is "". Add additional plugins as needed.  
     plugins:
       - name: cert-manager
