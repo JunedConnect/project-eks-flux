@@ -110,11 +110,3 @@ pluginsManager:
         version: 0.1.0-alpha
   baseImage: node:lts-alpine  # Default is node:lts-alpine
   version: latest # Default is latest
-  securityContext:
-    runAsUser: 1001
-    runAsNonRoot: true
-    allowPrivilegeEscalation: false
-    readOnlyRootFilesystem: false # needs to be turned off othewise plugin manager will not work
-    capabilities:
-      drop:
-        - ALL
