@@ -33,6 +33,10 @@ configMapGenerator: # I chose the configMap way to input the values as it allows
     namespace: trivy # needed in order for configmap to be created in the correct namespace
     files:
       - values.yaml=values/trivy-values.yml
+  - name: nginx-values
+    namespace: nginx # needed in order for configmap to be created in the correct namespace
+    files:
+      - values.yaml=values/nginx-values.yml
 configurations:
   - kustomizeconfig.yml
 
