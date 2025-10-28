@@ -4,7 +4,7 @@ config:
       create: false # default is true
   enableHelm: true # default is true
   watchPlugins: true # defualt is false
-  pluginsDir: /build/plugins
+  # pluginsDir: /build/plugins # only to be used if you use init containers to install the plugins
 
 serviceAccount:
   create: true # default is true
@@ -73,16 +73,16 @@ tolerations:
 #         name: headlamp-plugins
 
 
-#volumes set up that is needed for plugin to work
-volumeMounts: # volume mount for the headlamp container
-  - mountPath: /build/plugins
-    name: headlamp-plugins
+# #volumes set up that is needed for plugin to work
+# volumeMounts: # volume mount for the headlamp container # only to be used if you use init containers to install the plugins
+#   - mountPath: /build/plugins
+#     name: headlamp-plugins
 
-volumes:
-  - name: headlamp-plugins
-    emptyDir: {} # decided to use a temp volume as there is no actual data that I need to be persistent (since the headlamp app only has to use the static files htat the plugin installs on that directory for as long as the headlamp app, i.e. the pod, runs). Empty dir works here only because the headlamp app container and the plugin container exist in the same pod
-    # persistentVolumeClaim:
-    #   claimName: headlamp # The name of the Helm release
+# volumes: # only to be used if you use init containers to install the plugins
+#   - name: headlamp-plugins
+#     emptyDir: {} # decided to use a temp volume as there is no actual data that I need to be persistent (since the headlamp app only has to use the static files htat the plugin installs on that directory for as long as the headlamp app, i.e. the pod, runs). Empty dir works here only because the headlamp app container and the plugin container exist in the same pod
+#     # persistentVolumeClaim:
+#     #   claimName: headlamp # The name of the Helm release
 
 
 # testing out plugin management i.e. https://navneet-verma.medium.com/no-nonsense-guide-deploying-headlamp-on-vks-helm-plugins-53ca91517143
@@ -110,11 +110,11 @@ pluginsManager:
         version: 0.1.0-alpha
   baseImage: node:lts-alpine  # Default is node:lts-alpine
   version: latest # Default is latest
-  # securityContext:
-  #   runAsUser: 1001
-  #   runAsNonRoot: true
-  #   allowPrivilegeEscalation: false
-  #   readOnlyRootFilesystem: true
-  #   capabilities:
-  #     drop:
-  #       - ALL
+  securityContext:
+    runAsUser: 1001
+    runAsNonRoot: true
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    capabilities:
+      drop:
+        - ALL
