@@ -106,7 +106,7 @@ pluginsManager:
        source: https://artifacthub.io/packages/headlamp/external-secrets-operator-headlamp-plugin/external-secrets-operator
        version: 0.1.0-beta7
   baseImage: node:lts-alpine  # Default is node:lts-alpine
-  version: latest # Default is latest
+  version: latest # Default is latest # this is theHeadlamp plugin package version
   securityContext:
     readOnlyRootFilesystem: false
     runAsNonRoot: false
