@@ -96,9 +96,6 @@ pluginsManager:
      - name: trivy
        source: https://artifacthub.io/packages/headlamp/headlamp-trivy/headlamp_trivy
        version: 0.3.1
-     - name: ai-assistant
-       source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_ai_assistant
-       version: 0.1.0
      - name: flux
        source: https://artifacthub.io/packages/headlamp/headlamp-plugins/headlamp_flux
        version: 0.5.0
@@ -107,7 +104,7 @@ pluginsManager:
        version: 0.1.0
      - name: external-secrets-operator
        source: https://artifacthub.io/packages/headlamp/external-secrets-operator-headlamp-plugin/external-secrets-operator
-       version: 0.1.0
+       version: 0.1.0-beta7
   baseImage: node:lts-alpine  # Default is node:lts-alpine
   version: latest # Default is latest
   securityContext:
