@@ -1,0 +1,28 @@
+# operator:
+  # replicas: 1 # default is 1
+
+trivyOperator:
+  scanJobTolerations:
+    - key: infra
+      operator: Equal
+      value: "true"
+
+trivy:
+  mode: Standalone # default is Standalone. There is also ClientServer mode
+  severity: HIGH,CRITICAL # default is UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL
+  # server: # only used in ClientServer mode
+  #   replicas: 1 # default is 1
+
+nodeSelector:
+  infra: "true"
+tolerations:
+  - key: infra
+    operator: Equal
+    value: "true"
+
+nodeCollector:
+ tolerations:
+  - key: infra
+    operator: Equal
+    value: "true"
+ 

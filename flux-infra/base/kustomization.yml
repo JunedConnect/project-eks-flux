@@ -8,3 +8,4 @@ resources:
 - karpenter.yml
 - nginx.yml
 - prom-graf.yml
+- trivy.yml

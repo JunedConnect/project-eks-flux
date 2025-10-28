@@ -29,6 +29,10 @@ configMapGenerator: # I chose the configMap way to input the values as it allows
     namespace: karpenter # needed in order for configmap to be created in the correct namespace
     files:
       - values.yaml=values/karpenter-values.yml
+  - name: trivy-values
+    namespace: trivy # needed in order for configmap to be created in the correct namespace
+    files:
+      - values.yaml=values/trivy-values.yml
 configurations:
   - kustomizeconfig.yml
 
