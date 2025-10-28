@@ -9,7 +9,7 @@ trivyOperator:
 
 trivy:
   mode: Standalone # default is Standalone. There is also ClientServer mode
-  severity: HIGH,CRITICAL # default is UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL
+  severity: UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL # default is UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL
   # server: # only used in ClientServer mode
   #   replicas: 1 # default is 1
 
