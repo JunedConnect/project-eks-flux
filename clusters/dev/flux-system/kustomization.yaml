@@ -5,36 +5,36 @@ resources:
 - gotk-sync.yaml
 
 # custom lines below that will patch all flux controllers to use the "infra" as the node selector
-# patches:
-#   - patch: |
-#       - op: replace
-#         path: /spec/template/spec/nodeSelector
-#         value:
-#           infra: "true"
-#     target:
-#       kind: Deployment
-#       name: source-controller
-#   - patch: |
-#       - op: replace
-#         path: /spec/template/spec/nodeSelector
-#         value:
-#           infra: "true"
-#     target:
-#       kind: Deployment
-#       name: kustomize-controller
-#   - patch: |
-#       - op: replace
-#         path: /spec/template/spec/nodeSelector
-#         value:
-#           infra: "true"
-#     target:
-#       kind: Deployment
-#       name: helm-controller
-#   - patch: |
-#       - op: replace
-#         path: /spec/template/spec/nodeSelector
-#         value:
-#           infra: "true"
-#     target:
-#       kind: Deployment
-#       name: notification-controller
+patches:
+  - patch: |
+      - op: replace
+        path: /spec/template/spec/nodeSelector
+        value:
+          infra: "true"
+    target:
+      kind: Deployment
+      name: source-controller
+  - patch: |
+      - op: replace
+        path: /spec/template/spec/nodeSelector
+        value:
+          infra: "true"
+    target:
+      kind: Deployment
+      name: kustomize-controller
+  - patch: |
+      - op: replace
+        path: /spec/template/spec/nodeSelector
+        value:
+          infra: "true"
+    target:
+      kind: Deployment
+      name: helm-controller
+  - patch: |
+      - op: replace
+        path: /spec/template/spec/nodeSelector
+        value:
+          infra: "true"
+    target:
+      kind: Deployment
+      name: notification-controller
