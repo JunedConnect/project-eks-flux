@@ -17,13 +17,10 @@ spec:
           values: ["spot"]
         - key: karpenter.k8s.aws/instance-category
           operator: In
-          values: ["t"]
+          values: ["c", "t", "m"]
         - key: karpenter.k8s.aws/instance-generation
-          operator: In
-          values: ["2", "3"]
-        - key: karpenter.k8s.aws/instance-size
-          operator: In
-          values: ["micro"]
+          operator: Gt
+          values: ["2"]
       nodeClassRef:
         group: karpenter.k8s.aws
         kind: EC2NodeClass
