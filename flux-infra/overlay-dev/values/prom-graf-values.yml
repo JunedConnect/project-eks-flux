@@ -75,6 +75,7 @@ grafana:
 
 
 # the below is not explicitely mentioned in the prometheus stack helm chart values but it was taken from the kube-state-metrics helm chart values
+# https://github.com/prometheus-community/helm-charts/issues/1853
 kube-state-metrics:
   nodeSelector:
     infra: "true"
