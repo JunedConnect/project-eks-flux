@@ -22,7 +22,7 @@ spec:
           operator: Gt
           values: ["2"]
       nodeClassRef:
-        group: karpenter.k8s.aws
+        apiVersion: karpenter.k8s.aws/v1
         kind: EC2NodeClass
         name: al2023-latest
       expireAfter: 720h # 30 * 24h = 720h
