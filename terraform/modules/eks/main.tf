@@ -129,7 +129,6 @@ resource "aws_eks_node_group" "this" {
 
   labels = {
         # used to ensure infra runs on this node group
-        "karpenter.sh/controller" = "true" # karpenter uses this
         "infra"                   = "true" # infra uses this
       }
 

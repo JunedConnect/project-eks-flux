@@ -13,7 +13,7 @@ featureGates:
   spotToSpotConsolidation: true # default is false
 
 nodeSelector:
-  karpenter.sh/controller: "true"
+  infra: "true"
 tolerations:
   - key: infra
     operator: Equal
