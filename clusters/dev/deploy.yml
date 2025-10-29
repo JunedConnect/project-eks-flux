@@ -34,7 +34,7 @@ metadata:
   name: flux-infra-config
   namespace: flux-system
 spec:
-  interval: 5m0s
+  interval: 1m0s
   path: ./flux-infra/config
   prune: true
   sourceRef:
