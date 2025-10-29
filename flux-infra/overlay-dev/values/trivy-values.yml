@@ -1,7 +1,10 @@
-# operator:
+operator:
   # replicas: 1 # default is 1
+  # scanJobsConcurrentLimit: 1
 
 trivyOperator:
+  scanJobNodeSelector:
+    infra: "true"
   scanJobTolerations:
     - key: infra
       operator: Equal
