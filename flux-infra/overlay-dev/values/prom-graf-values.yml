@@ -71,4 +71,14 @@ grafana:
     tls:
       - secretName: grafana-ingress-tls
         hosts:
-        - grafana.lab.juned.co.uk
+          - grafana.lab.juned.co.uk
+
+
+# the below is not explicitely mentioned in the prometheus stack helm chart values but it was taken from the kube-state-metrics helm chart values
+kube-state-metrics:
+  nodeSelector:
+    infra: "true"
+  tolerations:
+    - key: infra
+      operator: Equal
+      value: "true"
