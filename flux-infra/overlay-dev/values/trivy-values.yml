@@ -1,4 +1,4 @@
-operator:
+# operator:
   # replicas: 1 # default is 1
   # scanJobsConcurrentLimit: 1
 
