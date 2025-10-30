@@ -1,18 +1,3 @@
-apiVersion: karpenter.k8s.aws/v1
-kind: EC2NodeClass
-metadata:
-  name: al2023-latest
-spec:
-  role: "karpenter-node-role"
-  amiSelectorTerms:
-    - alias: al2023@latest # this needs to be correct otherwise you will get an error that the NodeClaim cannot associate with the Node
-  subnetSelectorTerms:
-    - tags:
-        karpenter.sh/discovery: "juned-cluster"
-  securityGroupSelectorTerms:
-    - tags:
-        karpenter.sh/discovery: "juned-cluster"
----
 apiVersion: karpenter.sh/v1
 kind: NodePool
 metadata:
@@ -47,3 +32,18 @@ spec:
   disruption:
     consolidationPolicy: WhenEmptyOrUnderutilized
     consolidateAfter: 1m
+---
+apiVersion: karpenter.k8s.aws/v1
+kind: EC2NodeClass
+metadata:
+  name: al2023-latest
+spec:
+  role: "karpenter-node-role"
+  amiSelectorTerms:
+    - alias: al2023@latest # this needs to be correct otherwise you will get an error that the NodeClaim cannot associate with the Node
+  subnetSelectorTerms:
+    - tags:
+        karpenter.sh/discovery: "juned-cluster"
+  securityGroupSelectorTerms:
+    - tags:
+        karpenter.sh/discovery: "juned-cluster"
