@@ -10,7 +10,7 @@ aws_tags = {
 # EKS
 authentication_mode                         = "API"
 bootstrap_cluster_creator_admin_permissions = true
-cluster_version                             = "1.31"
+cluster_version                             = "1.34"
 endpoint_private_access                     = true
 endpoint_public_access                      = true
 upgrade_support_type                        = "STANDARD"

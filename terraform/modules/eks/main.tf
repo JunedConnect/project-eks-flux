@@ -34,6 +34,17 @@ resource "aws_eks_cluster" "this" {
 
 }
 
+resource "aws_eks_addon" "node-monitoring-agent" {
+  cluster_name = var.name
+  addon_name = "node-monitoring-agent"
+  addon_version = "v1.4.1-eksbuild.1"
+  
+  depends_on = [
+    aws_eks_cluster.this,
+    aws_eks_node_group.this
+  ]
+}
+
 resource "aws_eks_addon" "eks-pod-identity-agent" {
   cluster_name = var.name
   addon_name = "eks-pod-identity-agent"
@@ -48,7 +59,7 @@ resource "aws_eks_addon" "eks-pod-identity-agent" {
 resource "aws_eks_addon" "coredns" {
   cluster_name                = var.name
   addon_name                  = "coredns"
-  addon_version               = "v1.11.3-eksbuild.1"
+  addon_version               = "v1.21.1-eksbuild.2"
   resolve_conflicts_on_create = "OVERWRITE"
 
   configuration_values = jsonencode({
