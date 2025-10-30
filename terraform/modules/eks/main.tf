@@ -38,7 +38,21 @@ resource "aws_eks_addon" "metrics-server" {
   cluster_name = var.name
   addon_name = "metrics-server"
   addon_version = "v0.8.0-eksbuild.2"
-  
+  resolve_conflicts_on_create = "OVERWRITE"
+
+  configuration_values = jsonencode({
+    nodeSelector = {
+      infra = "true"
+    }
+    tolerations = [
+      {
+        key      = "infra"
+        operator = "Equal"
+        value    = "true"
+      }
+    ]
+  })
+
   depends_on = [
     aws_eks_cluster.this,
     aws_eks_node_group.this
@@ -49,7 +63,8 @@ resource "aws_eks_addon" "eks-node-monitoring-agent" {
   cluster_name = var.name
   addon_name = "eks-node-monitoring-agent"
   addon_version = "v1.4.1-eksbuild.1"
-  
+  resolve_conflicts_on_create = "OVERWRITE"
+
   depends_on = [
     aws_eks_cluster.this,
     aws_eks_node_group.this
