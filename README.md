@@ -122,6 +122,10 @@ Once deployed, you can access these components:
 
 **Kubernetes Dashboard (Headlamp)**
 Access Headlamp through the ingress URL configured in your environment.
+Note, create a token in order to access the Headlamp Dashboard:
+   ```bash
+   kubectl create token headlamp-admin -n headlamp --duration 100m
+   ```
 
 **Monitoring (Grafana)**
 Access Grafana through the ingress URL configured in your environment.
