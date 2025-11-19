@@ -1,0 +1,85 @@
+alertmanager:
+  alertmanagerSpec:
+    nodeSelector:
+      infra: "true"
+    tolerations:
+      - key: infra
+        operator: Equal
+        value: "true"
+
+prometheusOperator:
+  nodeSelector:
+    infra: "true"
+  tolerations:
+    - key: infra
+      operator: Equal
+      value: "true"
+  admissionWebhooks:
+    patch:
+      nodeSelector:
+        infra: "true"
+      tolerations:
+        - key: infra
+          operator: Equal
+          value: "true"
+
+
+
+prometheus:
+  enabled: true
+  prometheusSpec:
+    nodeSelector:
+      infra: "true"
+    tolerations:
+      - key: infra
+        operator: Equal
+        value: "true"
+  service:
+    type: ClusterIP
+  ingress:
+    enabled: true
+    ingressClassName: "nginx"
+    annotations:
+      nginx.org/hsts: "false"
+      cert-manager.io/cluster-issuer: issuer
+    hosts:
+      - prometheus.lab.juned.co.uk
+    tls:
+      - secretName: prometheus-ingress-tls
+        hosts:
+        - prometheus.lab.juned.co.uk
+
+
+grafana:
+  enabled: true
+  nodeSelector:
+    infra: "true"
+  tolerations:
+    - key: infra
+      operator: Equal
+      value: "true"
+  service:
+    type: ClusterIP
+  ingress:
+    enabled: true
+    ingressClassName: "nginx"
+    annotations:
+      nginx.org/hsts: "false"
+      cert-manager.io/cluster-issuer: issuer
+    hosts:
+      - grafana.lab.juned.co.uk
+    tls:
+      - secretName: grafana-ingress-tls
+        hosts:
+          - grafana.lab.juned.co.uk
+
+
+# the below is not explicitely mentioned in the prometheus stack helm chart values but it was taken from the kube-state-metrics helm chart values
+# https://github.com/prometheus-community/helm-charts/issues/1853
+kube-state-metrics:
+  nodeSelector:
+    infra: "true"
+  tolerations:
+    - key: infra
+      operator: Equal
+      value: "true"

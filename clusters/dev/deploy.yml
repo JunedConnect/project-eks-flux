@@ -1,0 +1,52 @@
+# apiVersion: kustomize.toolkit.fluxcd.io/v1
+# kind: Kustomization
+# metadata:
+#   name: flux-apps
+#   namespace: flux-system
+# spec:
+#   interval: 10m0s
+#   path: ./flux-apps/overlay-dev
+#   prune: true
+#   sourceRef:
+#     kind: GitRepository
+#     name: flux-system # this references the GitRepository resource which points to the actual Git Repo
+
+---
+
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: flux-infra
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  path: ./flux-infra/overlay-dev
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system  # this references the GitRepository resource which points to the actual Git Repo
+
+---
+
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: flux-infra-config
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  path: ./flux-infra/config
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system # this references the GitRepository resource which points to the actual Git Repo
+  dependsOn:
+    - name: flux-infra # this ensures that the flux-infra resrouce (above) is deployed before the flux-infra-config resourceis deployed. Otherwise, the flux-infra-config resource will fail to deploy as it needs the CRDs to be present.
+  patches: # this is used to patch the ClusterIssuer resource to use the staging server
+    - patch: |
+        - op: replace
+          path: /spec/acme/server
+          value: https://acme-staging-v02.api.letsencrypt.org/directory
+      target:
+        kind: ClusterIssuer
+        name: issuer

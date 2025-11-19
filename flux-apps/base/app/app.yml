@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: myapp
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+  labels:
+    app: myapp
+  namespace: myapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: myapp
+        image: nginx:1.28.0-alpine
+        ports:
+        - containerPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp
+  namespace: myapp
+spec:
+  selector:
+    app: myapp
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80 # i.e. the container port
+  type: ClusterIP
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: myapp
+  annotations:
+    cert-manager.io/cluster-issuer: issuer
+spec:
+  ingressClassName: nginx # this has to be the same ingressClassName as your ingresscontroller
+  rules:
+  - host: app.lab.juned.co.uk
+    http:
+      paths:
+       - path: /
+         pathType: Prefix
+         backend:
+          service:
+            name: myapp
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - app.lab.juned.co.uk
+    secretName: app-ingress-tls

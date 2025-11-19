@@ -1,0 +1,99 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../base
+
+
+configMapGenerator: # I chose the configMap way to input the values as it allows for flux to redeploy the resources if the values change
+  - name: prom-graf-values
+    namespace: monitor # needed in order for configmap to be created in the correct namespace
+    files:
+      - values.yaml=values/prom-graf-values.yml
+  - name: external-dns-values
+    namespace: external-dns # needed in order for configmap to be created in the correct namespace
+    files:
+      - values.yaml=values/external-dns-values.yml
+  - name: external-secrets-values
+    namespace: external-secrets # needed in order for configmap to be created in the correct namespace
+    files:
+      - values.yaml=values/external-secrets-values.yml
+  - name: headlamp-values
+    namespace: headlamp # needed in order for configmap to be created in the correct namespace
+    files:
+      - values.yaml=values/headlamp-values.yml
+  - name: cert-manager-values
+    namespace: cert-manager # needed in order for configmap to be created in the correct namespace
+    files:
+      - values.yaml=values/cert-manager-values.yml
+  - name: karpenter-values
+    namespace: karpenter # needed in order for configmap to be created in the correct namespace
+    files:
+      - values.yaml=values/karpenter-values.yml
+  - name: trivy-values
+    namespace: trivy # needed in order for configmap to be created in the correct namespace
+    files:
+      - values.yaml=values/trivy-values.yml
+  - name: nginx-values
+    namespace: nginx # needed in order for configmap to be created in the correct namespace
+    files:
+      - values.yaml=values/nginx-values.yml
+configurations:
+  - kustomizeconfig.yml
+
+  # looking at this configmap setup retrospectively, I could have:
+  # - used a patch in this file to input the values.yml into the helm releases, but then the patch would not work since it would only recognise a change in the name of the yaml file, and not the actual contents within it. This would resrult in the values not being used for hte helm release.
+  # - used a patch in this file to input the direct values into the helm releases. This would avoid the issues in the first option, but would make file very messy and hard to read.
+
+  # Therefore, I decided to use the kustomize configmap way to generate and input the values.yml for the helm releases. This is because it allows for flux to redeploy the helm releases with the new values, if the values change.
+
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/chart/spec/version
+        value: v1.19.1
+    target:
+      kind: HelmRelease
+      name: cert-manager
+  - patch: |-
+      - op: replace
+        path: /spec/chart/spec/version
+        value: v1.19.0
+    target:
+      kind: HelmRelease
+      name: external-dns
+  - patch: |-
+      - op: replace
+        path: /spec/chart/spec/version
+        value: v0.20.3
+    target:
+      kind: HelmRelease
+      name: external-secrets
+  - patch: |-
+      - op: replace
+        path: /spec/chart/spec/version
+        value: v4.13.3
+    target:
+      kind: HelmRelease
+      name: nginx-ingress
+  - patch: |-
+      - op: replace
+        path: /spec/chart/spec/version
+        value: v78.3.2
+    target:
+      kind: HelmRelease
+      name: prom-graf
+  - patch: |-
+      - op: replace
+        path: /spec/chart/spec/version
+        value: v0.36.0
+    target:
+      kind: HelmRelease
+      name: headlamp
+  - patch: |-
+      - op: replace
+        path: /spec/chart/spec/version
+        value: 1.8.1
+    target:
+      kind: HelmRelease
+      name: karpenter

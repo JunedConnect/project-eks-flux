@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cert-manager
+
+---
+
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: cert-manager
+  namespace: cert-manager
+spec:
+  url: https://charts.jetstack.io
+
+---
+
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: cert-manager
+  namespace: cert-manager
+spec:
+  chart:
+    spec:
+      chart: cert-manager
+      version: v1.19.1
+      interval: 10m0s # this is the interval for checking the chart i.e. version
+      sourceRef:
+        kind: HelmRepository
+        name: cert-manager
+  releaseName: cert-manager
+  targetNamespace: cert-manager # this is where to deploy the resources
+  interval: 10m0s # this is the interval for checking the release i.e. deployment of the chart
+  valuesFrom:
+    - kind: ConfigMap
+      name: cert-manager-values

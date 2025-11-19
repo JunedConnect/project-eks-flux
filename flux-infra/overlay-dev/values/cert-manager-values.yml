@@ -1,0 +1,41 @@
+crds:
+  enabled: true
+
+serviceAccount:
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::677276074604:role/cert-manager-role
+
+extraArgs:
+- --dns01-recursive-nameservers="8.8.8.8:53"
+- --dns01-recursive-nameservers-only
+
+nodeSelector:
+  infra: "true"
+tolerations:
+  - key: infra
+    operator: Equal
+    value: "true"
+
+webhook:
+  nodeSelector:
+    infra: "true"
+  tolerations:
+    - key: infra
+      operator: Equal
+      value: "true"
+
+cainjector:
+  nodeSelector:
+    infra: "true"
+  tolerations:
+    - key: infra
+      operator: Equal
+      value: "true"
+
+startupapicheck:
+  nodeSelector:
+    infra: "true"
+  tolerations:
+    - key: infra
+      operator: Equal
+      value: "true"

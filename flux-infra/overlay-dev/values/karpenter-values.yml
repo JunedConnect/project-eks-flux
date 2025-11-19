@@ -1,0 +1,20 @@
+replicas: 1 # default is 2 but it has been set to 1 since we only have 1 node and pod anti-affinity prevents both pods from running on same node
+serviceAccount:
+  create: true # default is true
+  name: karpenter
+  annotations:
+      eks.amazonaws.com/role-arn: "arn:aws:iam::677276074604:role/karpenter-role"
+logLevel: debug
+settings:
+  clusterName: "juned-cluster"
+#  interruptionQueue: "juned-cluster"
+
+featureGates:
+  spotToSpotConsolidation: true # default is false
+
+nodeSelector:
+  infra: "true"
+tolerations:
+  - key: infra
+    operator: Equal
+    value: "true"
