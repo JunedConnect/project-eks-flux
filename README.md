@@ -72,6 +72,7 @@ The project structure separates infrastructure management (flux-infra) from appl
 - AWS CLI
 - GitHub Personal Access Token (for your GitHub Repo)
 
+<br>
 
 1. Update `terraform/terraform.tfvars` (see Configuration Dependencies below) and deploy infrastructure:
    ```bash
