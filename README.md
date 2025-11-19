@@ -59,7 +59,7 @@ This approach eliminates manual cluster operations and ensures infrastructure ch
 └── Makefile               # Automation commands
 ```
 
-The project structure separates infrastructure management (flux-infra) from application deployment (flux-apps), with environment-specific configurations in overlays. This separation ensures clean boundaries between system components and business applications.
+The project structure separates infrastructure management (flux-infra) from application deployment (flux-apps), with environment-specific configurations in overlays.This separation ensures clean boundaries between system components and business applications.
 
 <br>
 
@@ -134,7 +134,7 @@ flux get helmreleases -A
 
 <br>
 
-## Common Issues & Solutions
+## Debugging
 
 ### Flux Sync Issues
 
