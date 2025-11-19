@@ -38,31 +38,6 @@ The combination of Flux and Karpenter creates a highly automated and efficient c
 
 This approach eliminates manual cluster operations and ensures infrastructure changes go through the same review process as application code.
 
-### How It All Works
-
-1. **Git Repository** stores all configuration as code
-   - Infrastructure specifications
-   - Helm chart values
-   - Application manifests
-   - Environment-specific overlays
-
-2. **Flux Controllers** watch for changes
-   - Source Controller: Fetches Git content
-   - Kustomize Controller: Processes Kustomizations
-   - Helm Controller: Manages Helm releases
-   - Notification Controller: Alerts on reconciliation
-
-3. **Karpenter** manages compute resources
-   - Watches for pending pods
-   - Provisions right-sized nodes
-   - Uses spot instances for cost optimization
-   - Consolidates workloads efficiently
-
-4. **Infrastructure Layer**
-   - Dedicated nodes for system components
-   - Tainted to prevent application workloads
-   - Runs controllers, operators, monitoring
-
 <br>
 
 ## Directory Structure
@@ -90,7 +65,13 @@ The project structure separates infrastructure management (flux-infra) from appl
 
 ## How to Deploy
 
-**Prerequisites**: Terraform, kubectl, Flux CLI, AWS CLI, GitHub Personal Access Token
+**Prerequisites**: 
+- Terraform
+- kubectl
+- Flux CLI
+- AWS CLI
+- GitHub Personal Access Token (for your GitHub Repo)
+
 
 1. Update `terraform/terraform.tfvars` (see Configuration Dependencies below) and deploy infrastructure:
    ```bash
@@ -104,7 +85,7 @@ The project structure separates infrastructure management (flux-infra) from appl
 
 3. Update configuration values in `flux-infra` directory (see Configuration Dependencies below)
 
-4. Bootstrap Flux:
+4. Update Flux Bootstrap configuration (see Configuration Dependencies below) and run Flux Bootstrap:
    ```bash
    make flux-bootstrap GITHUB_TOKEN=your_PAT_token_here
    ```
