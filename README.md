@@ -120,17 +120,17 @@ Before deploying, update these configuration values:
 
 Once deployed, you can access these components:
 
-**Kubernetes Dashboard (Headlamp)**
+**Kubernetes Dashboard (Headlamp)** -
 Access Headlamp through the ingress URL configured in your environment.
 Note, create a token in order to access the Headlamp Dashboard:
    ```bash
    kubectl create token headlamp-admin -n headlamp --duration 100m
    ```
 
-**Monitoring (Grafana)**
+**Monitoring (Grafana)** -
 Access Grafana through the ingress URL configured in your environment.
 
-**Infrastructure Components**
+**Infrastructure Components** -
 ```bash
 # Check Flux GitOps state
 flux get helmreleases -A
