@@ -4,6 +4,8 @@ The project demonstrates a **production-grade GitOps implementation** using **Fl
 
 This architecture leverages **GitOps practices** throughout, with **Flux** continuously syncing cluster state from Git, **Karpenter** managing dynamic node provisioning, and **Helm charts** deploying core infrastructure components. **Everything is declarative and version-controlled**, from infrastructure specifications to application configurations.
 
+<br>
+
 ## Key Features
 
 - **Flux CD** - GitOps engine for continuous deployment and reconciliation
@@ -20,6 +22,8 @@ This architecture leverages **GitOps practices** throughout, with **Flux** conti
   - **Trivy Operator** - Security scanning for containers
 - **Multi-Environment** - Separate configurations for dev, prod, and local
 - **Node Isolation** - Dedicated nodes for infrastructure workloads
+
+<br>
 
 ## Why GitOps with Flux
 
@@ -59,6 +63,8 @@ This approach eliminates manual cluster operations and ensures infrastructure ch
    - Tainted to prevent application workloads
    - Runs controllers, operators, monitoring
 
+<br>
+
 ## Directory Structure
 
 ```
@@ -79,6 +85,8 @@ This approach eliminates manual cluster operations and ensures infrastructure ch
 ```
 
 The project structure separates infrastructure management (flux-infra) from application deployment (flux-apps), with environment-specific configurations in overlays. This separation ensures clean boundaries between system components and business applications.
+
+<br>
 
 ## How to Deploy
 
@@ -101,6 +109,8 @@ The project structure separates infrastructure management (flux-infra) from appl
    make flux-bootstrap GITHUB_TOKEN=your_PAT_token_here
    ```
 
+<br>
+
 ## Configuration Dependencies
 
 Before deploying, update these configuration values:
@@ -122,7 +132,9 @@ Before deploying, update these configuration values:
 - `--branch` - GitHub Repository Branch name (e.g., `dev`, `main`)
 - `--path` - Path to Flux configuration (e.g., `clusters/dev`)
 
-### Accessing the Platform
+<br>
+
+## Accessing the Platform
 
 Once deployed, you can access these components:
 
@@ -137,6 +149,8 @@ Access Grafana through the ingress URL configured in your environment.
 # Check Flux GitOps state
 flux get helmreleases -A
 ```
+
+<br>
 
 ## Common Issues & Solutions
 
