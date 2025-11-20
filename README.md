@@ -1,4 +1,4 @@
-# FluxFlow
+# Flux Flow
 
 The project demonstrates a **production-grade GitOps implementation** using **Flux CD** to manage an Amazon EKS cluster. The setup showcases how modern Kubernetes cluster management can be fully automated through GitOps principles, with **Flux** handling infrastructure and application deployments, and **Karpenter** providing intelligent node provisioning.
 
