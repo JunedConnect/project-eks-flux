@@ -6,6 +6,10 @@ This architecture leverages **GitOps practices** throughout, with **Flux** conti
 
 <br>
 
+![Workflow Diagram](https://raw.githubusercontent.com/JunedConnect/project-eks-flux/main/images/fluxcd-workflow.jpg)
+
+<br>
+
 ## Key Features
 
 - **Flux CD** - GitOps engine for continuous deployment and reconciliation
