@@ -6,6 +6,8 @@ This architecture leverages **GitOps practices** throughout, with **Flux** conti
 
 <br>
 
+## Workflow
+
 ![Workflow Diagram](https://raw.githubusercontent.com/JunedConnect/project-eks-flux/main/images/fluxcd-workflow.jpg)
 
 <br>
