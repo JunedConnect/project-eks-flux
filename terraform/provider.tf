@@ -14,8 +14,8 @@ terraform {
   }
 
   backend "s3" {
-    bucket       = "tf-state-project-eks"
-    key          = "terraform.tfstate"
+    bucket       = "all-my-tf"
+    key          = "project-eks-flux/terraform.tfstate"
     region       = "eu-west-2"
     encrypt      = "true"
     use_lockfile = true
