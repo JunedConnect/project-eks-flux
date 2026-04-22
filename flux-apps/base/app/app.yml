@@ -50,6 +50,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: myapp
+  namespace: myapp
   annotations:
     cert-manager.io/cluster-issuer: issuer
 spec:
