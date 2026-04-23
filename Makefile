@@ -38,7 +38,7 @@ flux-bootstrap:
 	@echo "$(GITHUB_TOKEN)" | flux bootstrap github \
 		--token-auth \
 		--owner=junedconnect \
-		--repository=project-eks \
+		--repository=project-eks-flux \
 		--branch=dev \
 		--path=clusters/dev \
 		--personal \
