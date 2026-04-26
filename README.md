@@ -15,9 +15,8 @@ This architecture leverages **GitOps practices** throughout, with **Flux** conti
 ## Key Features
 
 - **Flux CD** - GitOps engine for continuous deployment and reconciliation
-- **GitHub Actions** - Automated CI/CD for Terraform plan/apply/destroy and Docker build/push workflows
+- **GitHub Actions** - Automated CI/CD for infrastructure provisioning
 - **Amazon EKS** - Managed Kubernetes with infrastructure node isolation
-- **Sample Workload Deployment** - Flux-managed weather application deployed through Kubernetes manifests
 - **Infrastructure Components**:
   - **Karpenter** - Smart node provisioning that responds to workload demands
   - **Cert-Manager** - Automated SSL/TLS certificate management
@@ -27,7 +26,7 @@ This architecture leverages **GitOps practices** throughout, with **Flux** conti
   - **Headlamp** - Modern Kubernetes dashboard
   - **External Secrets** - Secure secrets management
   - **Trivy Operator** - Security scanning for containers
-- **Environment Scaffolding** - `dev` is implemented, with `local` and `prod` directories scaffolded for expansion
+- **Multi-Environment** - Separate configurations for dev, prod, and local
 - **Node Isolation** - Dedicated nodes for infrastructure workloads
 
 <br>
@@ -51,8 +50,8 @@ This approach eliminates manual cluster operations and ensures infrastructure ch
 
 ```
 ./
-├── .github/workflows/      # CI/CD workflows for Terraform and Docker image automation
-├── app/                    # Sample React weather application and container build files
+├── .github/workflows/     # CI/CD workflows for Terraform and Docker image automation
+├── app/                   # Sample application
 ├── clusters/              # Environment-specific Flux Bootstrap
 ├── flux-apps/
 │   ├── base/              # Base app components
@@ -120,8 +119,8 @@ Before deploying, update these configuration values:
 **GitHub Repository Settings** (`Makefile` - flux-bootstrap target):
 - `--owner` - Your GitHub username or organisation
 - `--repository` - Your GitHub Repository name
-- `--branch` - GitHub Repository Branch name (e.g., `dev`, `main`)
-- `--path` - Path to Flux configuration (e.g., `clusters/dev`)
+- `--branch` - GitHub Repository Branch name (e.g. `dev`, `main`)
+- `--path` - Path to Flux configuration (e.g. `clusters/dev`)
 
 <br>
 
@@ -130,8 +129,7 @@ Before deploying, update these configuration values:
 Once deployed, you can access these components:
 
 **Sample Application** -
-Access the weather application through the ingress URL configured in `flux-apps/base/app/app.yml`
-(for the current dev setup this is `app.<your-domain>`).
+Access the application through the ingress URL configured in `flux-apps/base/app/app.yml`
 
 **Kubernetes Dashboard (Headlamp)** -
 Access Headlamp through the ingress URL configured in your environment.
