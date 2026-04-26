@@ -24,9 +24,9 @@ spec:
     spec:
       containers:
       - name: myapp
-        image: nginx:1.28.0-alpine
+        image: 677276074604.dkr.ecr.eu-west-2.amazonaws.com/weather-app
         ports:
-        - containerPort: 80
+        - containerPort: 8080
 
 ---
 
@@ -41,7 +41,7 @@ spec:
   ports:
   - protocol: TCP
     port: 80
-    targetPort: 80 # i.e. the container port
+    targetPort: 8080 # i.e. the container port
   type: ClusterIP
 
 ---
@@ -50,6 +50,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: myapp
+  namespace: myapp
   annotations:
     cert-manager.io/cluster-issuer: issuer
 spec:

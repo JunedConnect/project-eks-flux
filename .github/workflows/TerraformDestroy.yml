@@ -1,0 +1,36 @@
+name: Terraform Destroy
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+    terraformdestroy:
+        runs-on: ubuntu-24.04
+        defaults:
+            run:
+                working-directory: "./terraform"
+        permissions:
+            id-token: write   # This is required for requesting the JWT
+    
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Login to AWS
+              uses: aws-actions/configure-aws-credentials@v4
+              with:
+                role-to-assume: ${{ vars.AWS_GITHUB_ROLE_ARN }}
+                role-session-name: github-actions-session
+                aws-region: eu-west-2
+
+            - name: Set up Terraform
+              uses: hashicorp/setup-terraform@v3
+              with:
+                terraform_version: 1.11.1
+
+            - name: Terraform Init
+              run: terraform init
+
+            - name: Terraform Destroy
+              run: terraform destroy -auto-approve

@@ -11,7 +11,7 @@ spec:
     branch: dev
   secretRef:
     name: flux-system
-  url: https://github.com/junedconnect/project-eks.git
+  url: https://github.com/junedconnect/project-eks-flux.git
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
